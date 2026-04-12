@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Support.ai | Smart AI Customer Support Chatbot",
+  title: "Tynexa.ai | Smart AI Customer Support Chatbot",
   description: "Embed intelligent AI-powered customer support into your website in seconds. Fast, scalable, and designed to improve user experience with instant responses 24/7.",
 };
 
