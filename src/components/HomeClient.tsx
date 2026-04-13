@@ -1,7 +1,9 @@
 'use client'
 
+import axios from 'axios';
 import { AnimatePresence, motion } from 'motion/react' 
 import { useEffect, useRef, useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 
 function HomeClient({email}:{email?:string}) {
@@ -21,6 +23,8 @@ function HomeClient({email}:{email?:string}) {
   return ()=>document.removeEventListener("mousedown",handler)
  },[])
 
+ const navigate=useRouter()
+
  const features=[
   {
     title:"Pluy & Play",
@@ -35,6 +39,15 @@ function HomeClient({email}:{email?:string}) {
     desc:"Your customers get instent support 24/7."    
   }
  ]
+
+ const handleLogOut=async ()=>{
+  try {
+     const result = await axios.get("/api/auth/logout")
+     window.location.href="/"
+  } catch (error) {
+    console.log(error)
+  }
+ }
 
   return (
     <div className='min-h-screen bg-linear-to-br from-white to-zinc-50 text-zinc-900 overflow-x-hidden'>
@@ -56,8 +69,8 @@ function HomeClient({email}:{email?:string}) {
             animate={{opacity:1,y:0}}
             exit={{opacity:0,y:-6}}
             className='absolute bg-white rounded-xl border border-zinc-200 overflow-hidden'>
-              <button className='w-full text-left px-4 py-3 text-sm hover:bg-zinc-100'>Dashboard</button>
-              <button className='w-full px-4 py-3 text-sm text-red-600 hover:bg-zinc-100'>Logout</button>
+              <button className='w-full text-left px-4 py-3 text-sm hover:bg-zinc-100' onClick={()=>navigate.push("/dashboard")}>Dashboard</button>
+              <button className='w-full px-4 py-3 text-sm text-red-600 hover:bg-zinc-100' onClick={handleLogOut}>Logout</button>
           </motion.div>
           )}
           </AnimatePresence>
@@ -75,7 +88,7 @@ function HomeClient({email}:{email?:string}) {
           transition={{duration:0.7}}
           >
             <h1 className='text-3xl md:text-5xl font-bold tracking-tight leading-tight'>
-              <span className='bg-gradient-to-r from-black to-zinc-500 bg-clip-text text-transparent'>
+              <span className='bg-linear-to-r from-black to-zinc-500 bg-clip-text text-transparent'>
                 TynexaAI
               </span>{" "}
               Customer Support chatbot<br />
@@ -89,7 +102,7 @@ function HomeClient({email}:{email?:string}) {
       </p>
             <div className='mt-10 flex gap-4'>
 
-              {email?<button className='px-7 py-3 rounded-xl bg-black text-white font-medium disabled:opacity-60'>Go to Dashboard</button>:
+              {email?<button className='px-7 py-3 rounded-xl bg-black text-white font-medium disabled:opacity-60' onClick={()=>navigate.push("/dashboard")}>Go to Dashboard</button>:
               <button className='px-7 py-3 rounded-xl bg-black text-white font-medium disabled:opacity-60' onClick={handleLogin}>Get Started</button> }
 
               <a href='#feature' className='px-7 py-3 rounded-xl border border-zinc-300 text-zinc-700 hover:bg-zinc-100 transition'>Learn More</a>
@@ -166,6 +179,11 @@ function HomeClient({email}:{email?:string}) {
           </div>
         </div>
       </section>
+
+      <footer className='py-10 text-center text-sm text-zinc-500'>
+        &copy; {new Date().getFullYear()} TynexaAI. All rights reserved.
+
+      </footer>
 
 
     </div>
