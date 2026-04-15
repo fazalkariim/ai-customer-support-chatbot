@@ -11,8 +11,9 @@ export async function POST(req:NextRequest){
                 {message:"owner id is required"},
                 {status:400}
             )
-        }
+        } 
         await connectDb()
+        
         const settings=await Settings.findOneAndUpdate(
             {ownerId},
             {businessName,supportEmail,knowledge},
