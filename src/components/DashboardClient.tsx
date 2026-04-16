@@ -58,11 +58,11 @@ function DashboardClient ({ownerId}:{ownerId:string}) {
     transition={{duration:0.5}}
     className='fixed top-0 left-0 w-full z-50 bg-white/70 backdrop-blur-xl border-b border-zinc-200'
   >
-    <div className='max-w-6xl mx-auto px-10 h-14 flex items-center justify-between'>
-      <div className='cursor-pointer text-base font-semibold tracking-tight' onClick={()=>navigate.push("/")}>
+    <div className='max-w-6xl mx-auto px-10 h-16 flex items-center justify-between'>
+      <div className='cursor-pointer  font-semibold text-lg tracking-tight' onClick={()=>navigate.push("/")}>
         Tynexa <span className='text-zinc-400'>AI</span>
       </div>
-      <button className="px-3 py-1.5 rounded-lg border border-zinc-300 text-sm hover:bg-zinc-100 transition">
+      <button className="px-3 cursor-pointer py-1.5 rounded-lg border border-zinc-300 text-sm hover:bg-zinc-100 transition" onClick={()=>navigate.push("/embed")}>
         Embed Chatbot
       </button>
     </div>
@@ -108,7 +108,7 @@ function DashboardClient ({ownerId}:{ownerId:string}) {
         whileTap={{scale:0.97}}
         disabled={loading}
         onClick={handleSettings}
-        className="px-7 py-3 rounded-xl bg-black text-white text-sm font-medium hover:bg-zinc-800 transition disabled:opacity-60"
+        className="px-7 py-3 rounded-xl bg-black cursor-pointer text-white text-sm font-medium hover:bg-zinc-800 transition disabled:opacity-60"
         >
         {loading?"Saving...":"Save"}
         
@@ -117,7 +117,7 @@ function DashboardClient ({ownerId}:{ownerId:string}) {
         {saved && <motion.span
                    initial={{opacity:0, y:6}}
                    animate={{opacity:1, y:0}}
-                   className="text-sm font-medium text-emerald-600">
+                   className="text-sm font-medium text-emerald-600 ">
                    
           ✅ Settings Saved
         

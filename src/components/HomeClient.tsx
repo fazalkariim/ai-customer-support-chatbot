@@ -8,7 +8,9 @@ import { useRouter } from 'next/navigation';
 
 function HomeClient({email}:{email?:string}) {
 
+  const[loading, setLoading]=useState(false)
     const handleLogin=()=>{
+      setLoading(true)
         window.location.href="/api/auth/login"
     }
  const firstLetter = email ? email[0].toUpperCase() : "";
@@ -69,13 +71,13 @@ function HomeClient({email}:{email?:string}) {
             animate={{opacity:1,y:0}}
             exit={{opacity:0,y:-6}}
             className='absolute bg-white rounded-xl border border-zinc-200 overflow-hidden'>
-              <button className='w-full text-left px-4 py-3 text-sm hover:bg-zinc-100' onClick={()=>navigate.push("/dashboard")}>Dashboard</button>
-              <button className='w-full px-4 py-3 text-sm text-red-600 hover:bg-zinc-100' onClick={handleLogOut}>Logout</button>
+              <button className='w-full text-left px-4 py-3 text-sm cursor-pointer hover:bg-zinc-100' onClick={()=>navigate.push("/dashboard")}>Dashboard</button>
+              <button className='w-full px-4 py-3 text-sm text-red-600 cursor-pointer hover:bg-zinc-100' onClick={handleLogOut}>Logout</button>
           </motion.div>
           )}
           </AnimatePresence>
 
-        </div>: <button className='cursor-pointer px-5 py-2 rounded-full bg-black text-white text-sm font-medium hover:bg-zinc-800 transition disabled:opacity-60 flex items-center gap-2' onClick={handleLogin}>Login</button>}
+        </div>: <button className='cursor-pointer px-5 py-2 rounded-full bg-black text-white text-sm font-medium hover:bg-zinc-800 transition disabled:opacity-60 flex items-center gap-2' onClick={handleLogin} disabled={loading}>{loading?"Loading...":"Login"}</button>}
     
     </div>
       </motion.div>
@@ -102,7 +104,7 @@ function HomeClient({email}:{email?:string}) {
       </p>
             <div className='mt-10 flex gap-4'>
 
-              {email?<button className='px-7 py-3 rounded-xl bg-black text-white font-medium disabled:opacity-60' onClick={()=>navigate.push("/dashboard")}>Go to Dashboard</button>:
+              {email?<button className='px-7 py-3 rounded-xl bg-black text-white font-medium disabled:opacity-60 cursor-pointer' onClick={()=>navigate.push("/dashboard")}>Go to Dashboard</button>:
               <button className='px-7 py-3 rounded-xl bg-black text-white font-medium disabled:opacity-60' onClick={handleLogin}>Get Started</button> }
 
               <a href='#feature' className='px-7 py-3 rounded-xl border border-zinc-300 text-zinc-700 hover:bg-zinc-100 transition'>Learn More</a>

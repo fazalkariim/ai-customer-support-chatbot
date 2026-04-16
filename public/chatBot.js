@@ -144,7 +144,7 @@
       input.value=""
 
       const typing=document.createElement("div")
-      typing.innerHTML="Typing..."
+      // typing.innerHTML="Typing..."
       Object.assign(typing.style,{
         fontSize:"12px",
         color:"#6b7280",
@@ -165,7 +165,9 @@
         const data = await response.json()
         addMessage(data || "something went wrong","ai")
       } catch (error) {
-        
+        console.log(error)
+        messageArea.removeChild(typing)
+        addMessage(data || "something went wrong","ai")
       }
     }
 
